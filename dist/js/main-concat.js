@@ -23,6 +23,15 @@ var AMPEr = function () {
     cookieName: "AMPEr",
     cookieDays: 365,
     classPrefix: "AMPEr",
+    language: "nl",
+    text: {
+      en: {
+        modalTitle: "Hey! We want to give you cookies."
+      },
+      nl: {
+        modalTitle: "Hey, wil je een cookie?"
+      }
+    },
     analyticCallback: function analyticCallback() {
       console.log("Consent for analytic cookies!");
     },
@@ -43,12 +52,19 @@ var AMPEr = function () {
 
   var showCookieWindow = function showCookieWindow() {
     // Make the wrapper
-    var cookieWindow = document.createElement("div");
+    var cookieWindow = document.createElement("section");
     cookieWindow.className = settings.classPrefix + "_modal"; // Inner container
 
     var cookieWindow_inner = document.createElement("div");
     cookieWindow_inner.className = settings.classPrefix + "_modal_inner";
     cookieWindow.appendChild(cookieWindow_inner); // Append child to wrapper
+    // Inner head
+
+    var cookieWindow_head = document.createElement("h1");
+    cookieWindow_head.className = settings.classPrefix + "_modal_head";
+    cookieWindow_head.innerHTML = settings.text[settings.language].modalTitle;
+    cookieWindow_inner.appendChild(cookieWindow_head); // Append before </body> tag
+    // Add to body
 
     document.body.appendChild(cookieWindow); // Append before </body> tag
   };
@@ -117,12 +133,12 @@ var AMPEr = function () {
 
     if (cookie === null) {
       setCookie(settings.cookieName, AMPEr, settings.cookieDays);
-      showCookieWindow();
     } else {
       var cookieString = getCookie(settings.cookieName);
       AMPEr = JSON.parse(cookieString);
-    } // Execute callbacks for category's
+    }
 
+    showCookieWindow(); // Execute callbacks
 
     execute();
   };
@@ -173,7 +189,9 @@ var AMPEr = function () {
 "use strict";
 
 function main() {
-  AMPEr.init();
+  AMPEr.init({
+    language: "nl"
+  });
 }
 
 main();
