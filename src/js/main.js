@@ -1,7 +1,5 @@
 function main(){
-    AMPEr.init({
-        language: "nl",
-    });
+    AMPEr.init();    
 }
 
 main();
