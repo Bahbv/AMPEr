@@ -1,5 +1,7 @@
 function main(){
-    AMPEr.init();    
+    AMPEr.init({
+        debugMode: true,
+    });    
 }
 
 main();

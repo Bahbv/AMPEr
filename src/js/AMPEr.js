@@ -32,6 +32,8 @@ var AMPEr = (function () {
                 modalContent: "This is body text for giving a little bit more information about cookies in the modal ENGELS",
                 acceptBtn: "Accept all",
                 settingsBtn: "<span class='sr-only'>Settings</span><i class='icon-gear' aria-hidden='true'></i>",
+                saveBtn: "Save",
+                backBtn: "Back",
                 analytic: "Analytic cookies",
                 marketing: "Marketing cookies",
                 personalization: "Personalization cookies",
@@ -41,6 +43,8 @@ var AMPEr = (function () {
                 modalTitle: "Hey, wil je een cookie?",
                 modalContent: "Dit is body tekst voor een klein beetje tekst met wat extra informatie in de cookiemodal NEDERLANDS.",
                 acceptBtn: "Accepteer alles",
+                saveBtn: "Opslaan",
+                backBtn: "Terug",
                 settingsBtn: "<span class='sr-only'>Instellingen</span>",
                 analytic: "Analytische cookies",
                 marketing: "Marketing cookies",
@@ -101,7 +105,7 @@ var AMPEr = (function () {
 
 	/**
 	 * Make the banner and attacht it to the body
-     * @TODO: Make the settings HTML
+     * @TODO: Show settings only if there is a cookie for it
      * @TODO: Make the information HTML
 	 */
 	const showCookieWindow = function () {
@@ -109,6 +113,7 @@ var AMPEr = (function () {
         let html;
         html =  '<section class="'+ settings.classPrefix +'_modal" id="AMPEr_Cookies">';
         html += '<div class="'+ settings.classPrefix +'_modal_inner">';
+        // Home
         html += '<div id="AMPEr_modal_1">';
         html += '<h1 class="'+ settings.classPrefix +'_modal_head">'+ settings.lexicon.[settings.language].modalTitle +'</h1>'
         html += '<p class="'+ settings.classPrefix +'_modal_text">'+ settings.lexicon.[settings.language].modalContent +'</p>'
@@ -116,17 +121,89 @@ var AMPEr = (function () {
         html += '<button id="AMPEr_accept" class="'+ settings.classPrefix +'_btn '+ settings.classPrefix +'_btn--accept">'+ settings.lexicon.[settings.language].acceptBtn +'</button>';
         html += '<button id="AMPEr_settings" class="'+ settings.classPrefix +'_btn '+ settings.classPrefix +'_btn--settings">'+ settings.lexicon.[settings.language].settingsBtn +'</button>';
         html += '</div></div>';
+        // Settings
+        html += '<div id="AMPEr_modal_2">';
+        // Essential
+        html += '<div class="'+ settings.classPrefix +'_settings_group">';
+        html += '<label class="'+ settings.classPrefix +'_switch" for="AMPEr_essential">'+ settings.lexicon.[settings.language].essential +' <input type="checkbox" id="AMPEr_essential" checked disabled />';
+        html += '<div class="'+ settings.classPrefix +'_slider '+ settings.classPrefix +'_slider--round"></div></label>';
+        html += '</div>';
+        // Analytic
+        html += '<div class="'+ settings.classPrefix +'_settings_group">';
+        html += '<label class="'+ settings.classPrefix +'_switch" for="AMPEr_analytic">'+ settings.lexicon.[settings.language].analytic +' <input type="checkbox" id="AMPEr_analytic" />';
+        html += '<div class="'+ settings.classPrefix +'_slider '+ settings.classPrefix +'_slider--round"></div></label>';
+        html += '</div>';
+        // Marketing
+        html += '<div class="'+ settings.classPrefix +'_settings_group">';
+        html += '<label class="'+ settings.classPrefix +'_switch" for="AMPEr_marketing">'+ settings.lexicon.[settings.language].marketing +' <input type="checkbox" id="AMPEr_marketing" />';
+        html += '<div class="'+ settings.classPrefix +'_slider '+ settings.classPrefix +'_slider--round"></div></label>';
+        html += '</div>';
+        // Personalization
+        html += '<div class="'+ settings.classPrefix +'_settings_group">';
+        html += '<label class="'+ settings.classPrefix +'_switch" for="AMPEr_personalization">'+ settings.lexicon.[settings.language].personalization +' <input type="checkbox" id="AMPEr_personalization" />';
+        html += '<div class="'+ settings.classPrefix +'_slider '+ settings.classPrefix +'_slider--round"></div></label>';
+        html += '</div>';
+        // Buttons
+        html += '<div class="'+ settings.classPrefix +'_modal_buttons">';
+        html += '<button id="AMPEr_save" class="'+ settings.classPrefix +'_btn '+ settings.classPrefix +'_btn--save">'+ settings.lexicon.[settings.language].saveBtn +'</button>';
+        html += '<button id="AMPEr_back" class="'+ settings.classPrefix +'_btn '+ settings.classPrefix +'_btn--back">'+ settings.lexicon.[settings.language].backBtn +'</button>';
+        html += '</div>';
+        // Close 
+        html += '</div>';
         html += '</div></section>';
         
-        // Add the html to the body
+        // Add the html to the body and initialize listeners
         document.body.insertAdjacentHTML( 'beforeend', html );
+        addModalListeners();
 
-        // Add functions to the buttons
-        const acceptBtn = document.getElementById("AMPEr_accept");
-        acceptBtn.onclick = function(){ acceptAllAndClose(); };
-        const settingsBtn = document.getElementById("AMPEr_settings");
-        settingsBtn.onclick = function(){ showSettings(); };
+
     };
+
+    const addModalListeners = function (){
+                // Analytic checkbox
+                const analyticSwitch = document.getElementById("AMPEr_analytic");
+                if (AMPEr.analytic == 1){ analyticSwitch.checked = true; }
+                analyticSwitch.onchange = function (){ 
+                    if (this.checked == true){
+                        AMPEr.analytic = 1;
+                    } else {
+                        AMPEr.analytic = 0;
+                    }        
+                }
+        
+                // Marketing checkbox
+                const marketingSwitch = document.getElementById("AMPEr_marketing");
+                if (AMPEr.marketing == 1){ marketingSwitch.checked = true; }
+                marketingSwitch.onchange = function (){ 
+                    if (this.checked == true){
+                        AMPEr.marketing = 1;
+                    } else {
+                        AMPEr.marketing = 0;
+                    }        
+                }
+                // Personalization checkbox
+                const personalizationSwitch = document.getElementById("AMPEr_personalization");
+                if (AMPEr.personalization == 1){ personalizationSwitch.checked = true; }
+                personalizationSwitch.onchange = function (){ 
+                    if (this.checked == true){
+                        AMPEr.personalization = 1;
+                    } else {
+                        AMPEr.personalization = 0;
+                    }        
+                }
+                // Accept button
+                const acceptBtn = document.getElementById("AMPEr_accept");
+                acceptBtn.onclick = function(){ acceptAllAndClose(); };
+                // Settings button
+                const settingsBtn = document.getElementById("AMPEr_settings");
+                settingsBtn.onclick = function(){ showSettings(); };
+                // Save button
+                const saveBtn = document.getElementById("AMPEr_save");
+                saveBtn.onclick = function(){ saveAndClose(); };
+                // Back button 
+                const backBtn = document.getElementById("AMPEr_back");
+                backBtn.onclick = function(){ console.log("Back button..") };
+    }
 
     /**
      * Execute the callbacks for analytic, marketing and personalization cookies
@@ -142,6 +219,7 @@ var AMPEr = (function () {
      * Also executes the callbacks if its the first time running.
      */
     const saveAndClose = function(){
+        // @TODO: Get values
         setCookie(settings.cookieName, AMPEr, settings.cookieDays);
         if (firstTime){ execute(); }
         closeModal();
@@ -229,9 +307,8 @@ var AMPEr = (function () {
             AMPEr = JSON.parse(cookieString);
         }
 
-        showCookieWindow();
-        // Execute callbacks
-        if (!firstTime) { execute(); }
+        if (firstTime || settings.debugMode) { showCookieWindow(); }
+        if (!firstTime) { execute(); } 
 
     };
 

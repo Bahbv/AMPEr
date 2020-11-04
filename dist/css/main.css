@@ -310,7 +310,8 @@ header {
   padding: 0 15px; }
 
 main {
-  padding: 0 15px; }
+  padding: 0 15px;
+  border-bottom: 2px solid #a74992; }
 
 html {
   background-color: #e7e4e4fb; }
