@@ -1,13 +1,41 @@
 /* Styling for AMPEr cookie banner 
  * 1. Variables
- * 2. Modal
- * 3. Toggle switch component
+ * 2. Helpers
+ * 3. Modal
+ * 4. Buttons and icon's
+ * 5. Toggle switch component
  */
 /* 1. Variables */
-/* 2. Modal */
-/* 3. Toggle switch component */
+/* Helpers */
+.sr-only {
+  border: 0 !important;
+  clip: rect(1px, 1px, 1px, 1px) !important;
+  -webkit-clip-path: inset(50%) !important;
+  clip-path: inset(50%) !important;
+  height: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important;
+  white-space: nowrap !important; }
+
+/* 3. Modal */
+.AMPEr_modal {
+  max-width: 350px;
+  position: fixed;
+  bottom: 15px;
+  left: 15px;
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px; }
+  .AMPEr_modal_head {
+    margin: 0;
+    font-size: 2rem; }
+
+/* 4. Buttons and icon's */
+/* 5. Toggle switch component */
 .AMPEr_switches {
-  max-width: 300px;
   padding: 0;
   margin: 0;
   list-style: none; }

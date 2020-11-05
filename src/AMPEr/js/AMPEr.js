@@ -13,12 +13,14 @@ var AMPEr = (function () {
 
     const publicMethod = {};
     let settings;
+    let firstFocusedElement;
     let firstTime = false;
+    let modal;
     // Cookie object
     let AMPEr = {
-        analytic: 0,
-        marketing: 0,
-        personalization: 0,
+        analytic: 1,
+        marketing: 1,
+        personalization: 1,
     }
     // Defaults
     let defaults = {
@@ -28,24 +30,24 @@ var AMPEr = (function () {
         language: "en",
         lexicon: {
             en: {
-                modalTitle: "Hey! We want to give you cookies.",
+                modalTitle: "<i class='AMPEr_icon--rozekoek' aria-hidden='true'></i>Cookies?",
                 modalContent: "This is body text for giving a little bit more information about cookies in the modal ENGELS",
-                acceptBtn: "Accept all",
-                settingsBtn: "<span class='sr-only'>Settings</span><i class='icon-gear' aria-hidden='true'></i>",
-                saveBtn: "Save",
-                backBtn: "Back",
+                acceptBtn: "Accept all <span class='sr-only'>cookies and close this popup.</span>",
+                settingsBtn: "<span class='sr-only'>Settings</span><i class='AMPEr_icon--gear' aria-hidden='true'></i>",
+                saveBtn: "Save <span class='sr-only'>cookie settings and close the this popup.</span>",
+                backBtn: "Back <span class='sr-only'>to first screen.</span>",
                 analytic: "Analytic cookies",
                 marketing: "Marketing cookies",
                 personalization: "Personalization cookies",
                 essential: "Functional cookies",
             },
             nl: {
-                modalTitle: "Hey, wil je een cookie?",
+                modalTitle: "<i class='AMPEr_icon--rozekoek' aria-hidden='true'></i>Cookies?",
                 modalContent: "Dit is body tekst voor een klein beetje tekst met wat extra informatie in de cookiemodal NEDERLANDS.",
-                acceptBtn: "Accepteer alles",
-                saveBtn: "Opslaan",
-                backBtn: "Terug",
-                settingsBtn: "<span class='sr-only'>Instellingen</span>",
+                acceptBtn: "Accepteer alles <span class='sr-only'>qua cookies en sluit deze popup.</span>",
+                saveBtn: "<span class='sr-only'>Instellingen</span> Opslaan <span class='sr-only'>en deze popup sluiten.</span>",
+                backBtn: "Terug <span class='sr-only'>Naar het vorige scherm</span>",
+                settingsBtn: "<span class='sr-only'>Instellingen</span><i class='AMPEr_icon--gear' aria-hidden='true'></i>",
                 analytic: "Analytische cookies",
                 marketing: "Marketing cookies",
                 personalization: "Personalisatie cookies",
@@ -105,23 +107,22 @@ var AMPEr = (function () {
 
     /**
      * Make the banner / modal, attach listeners and attacht it to the body
+     * @TODO: Switch to settings and back, make it accesible with a focus switch?
      * @TODO: Show settings only if there is a cookie for it
      * @TODO: Make the information HTML
      */
     const showCookieWindow = function () {
         // Make the modal 
         let html;
-        html = '<section class="' + settings.classPrefix + '_modal" id="AMPEr_Cookies">';
+        html = '<div class="' + settings.classPrefix + '_modal" id="AMPEr_Cookies" role="dialog" aria-labelledby="AMPEr_title" aria-describedby="AMPEr_description">';
         html += '<div class="' + settings.classPrefix + '_modal_inner">';
-
         html += '<div id="AMPEr_modal_1">';
-        html += '<h1 class="' + settings.classPrefix + '_modal_head">' + settings.lexicon.[settings.language].modalTitle + '</h1>'
-        html += '<p class="' + settings.classPrefix + '_modal_text">' + settings.lexicon.[settings.language].modalContent + '</p>'
+        html += '<h2 class="' + settings.classPrefix + '_modal_head" id="AMPEr_title">' + settings.lexicon.[settings.language].modalTitle + '</h2>'
+        html += '<p class="' + settings.classPrefix + '_modal_text" id="AMPEr_description">' + settings.lexicon.[settings.language].modalContent + '</p>'
         html += '<div class="' + settings.classPrefix + '_modal_buttons">';
         html += '<button id="AMPEr_accept" class="' + settings.classPrefix + '_btn ' + settings.classPrefix + '_btn--accept">' + settings.lexicon.[settings.language].acceptBtn + '</button>';
         html += '<button id="AMPEr_settings" class="' + settings.classPrefix + '_btn ' + settings.classPrefix + '_btn--settings">' + settings.lexicon.[settings.language].settingsBtn + '</button>';
         html += '</div></div>';
-
         html += '<div id="AMPEr_modal_2">';
         html += '<ul class="'+ settings.classPrefix +'_switches">';
         html += '<li class="'+ settings.classPrefix +'_switch">';
@@ -150,11 +151,11 @@ var AMPEr = (function () {
         html += '<button id="AMPEr_back" class="' + settings.classPrefix + '_btn ' + settings.classPrefix + '_btn--back">' + settings.lexicon.[settings.language].backBtn + '</button>';
         html += '</div>';
         html += '</div>';
-
-        html += '</div></section>';
-
-        // Add the html to the body and initialize listeners
+        html += '</div></div>';
         document.body.insertAdjacentHTML('beforeend', html);
+        modal = document.getElementById('AMPEr_Cookies');
+
+        setFocus();
         addModalListeners();
     };
 
@@ -230,13 +231,14 @@ var AMPEr = (function () {
     }
 
     /**
-     * Closes the modal
+     * Closes the modal and set the focus where it was
      * @TODO:we could use a class and a timeout to give this a nice animation,
      * or animate it with javascript?
      */
     const closeModal = function () {
         const modal = document.getElementById("AMPEr_Cookies");
         modal.remove();
+        firstFocusedElement.focus();
     }
 
 
@@ -281,6 +283,17 @@ var AMPEr = (function () {
         return null;
     }
 
+    /**
+     * Save the element that is in focus and set the
+     * focus to the first tabable element of the modal
+     */
+    const setFocus = function (){
+        firstFocusedElement = document.activeElement;
+        let focusableElements = modal.querySelectorAll('a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"]');
+        focusableElements = Array.prototype.slice.call(focusableElements);
+        const firstFocusableElement = focusableElements[0];
+        firstFocusableElement.focus();
+    }
 
     //////////////////
     // Public methods
