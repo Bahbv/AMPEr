@@ -6,7 +6,7 @@
  * 5. Toggle switch component
  */
 /* 1. Variables */
-/* Helpers */
+/* 2. Helpers ( Maybe this is also included, but heck .. )*/
 .sr-only {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important;
@@ -22,25 +22,53 @@
 
 /* 3. Modal */
 .AMPEr_modal {
-  max-width: 350px;
+  max-width: 22rem;
   position: fixed;
-  bottom: 15px;
-  left: 15px;
+  bottom: 1rem;
+  left: 1rem;
   background-color: white;
-  padding: 15px;
+  padding: 1rem;
   border-radius: 10px; }
   .AMPEr_modal_head {
     margin: 0;
     font-size: 2rem; }
 
 /* 4. Buttons and icon's */
+.AMPEr_modal_buttons button {
+  margin-right: 0.625rem; }
+
+.AMPEr_modal_buttons button:last-of-type {
+  margin-right: 0; }
+
+.AMPEr_btn {
+  display: inline-block;
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 0;
+  text-decoration: none;
+  background: #0069ed;
+  color: #ffffff;
+  font-size: 1rem;
+  cursor: pointer;
+  text-align: center;
+  transition: background 250ms ease-in-out,  transform 150ms ease;
+  -webkit-appearance: none;
+  -moz-appearance: none; }
+  .AMPEr_btn:hover, .AMPEr_btn:focus {
+    background: #0053ba; }
+  .AMPEr_btn:focus {
+    outline: 1px solid #fff;
+    outline-offset: -4px; }
+  .AMPEr_btn:active {
+    transform: scale(0.99); }
+
 /* 5. Toggle switch component */
 .AMPEr_switches {
   padding: 0;
   margin: 0;
   list-style: none; }
   .AMPEr_switches li {
-    margin-bottom: 10px; }
+    margin-bottom: 0.625rem; }
   .AMPEr_switches input {
     position: absolute;
     left: -9999px; }
@@ -50,9 +78,9 @@
     justify-content: space-between; }
   .AMPEr_switches .AMPEr_switch span:last-child {
     position: relative;
-    width: 50px;
-    height: 26px;
-    border-radius: 15px;
+    width: 3.125rem;
+    height: 1.625rem;
+    border-radius: 0.9375rem;
     background: grey;
     transition: all 0.3s; }
     .AMPEr_switches .AMPEr_switch span:last-child:before {
@@ -60,8 +88,8 @@
       position: absolute;
       left: 1px;
       top: 1px;
-      width: 24px;
-      height: 24px;
+      width: 1.5rem;
+      height: 1.5rem;
       background: white;
       border-radius: 50%;
       z-index: 1;
@@ -70,21 +98,21 @@
       content: "";
       position: absolute;
       top: 50%;
-      right: 8px;
-      width: 12px;
-      height: 12px;
+      right: 0.5rem;
+      width: 0.75rem;
+      height: 0.75rem;
       transform: translateY(-50%);
       background: url(../svg/switch-unchecked.svg);
-      background-size: 12px 12px; }
+      background-size: 0.75rem 0.75rem; }
   .AMPEr_switches .AMPEr_switch input[disabled] + label span:last-of-type {
     opacity: 0.5; }
   .AMPEr_switches .AMPEr_switch input:checked + label span:last-child {
     background: #e5007e; }
     .AMPEr_switches .AMPEr_switch input:checked + label span:last-child:before {
-      transform: translateX(24px); }
+      transform: translateX(1.5rem); }
     .AMPEr_switches .AMPEr_switch input:checked + label span:last-child:after {
-      width: 14px;
-      height: 14px;
-      left: 8px;
+      width: 0.875rem;
+      height: 0.875rem;
+      left: 0.5rem;
       background-image: url(../svg/switch-checked.svg);
-      background-size: 14px 14px; }
+      background-size: 0.875rem 0.875rem; }
