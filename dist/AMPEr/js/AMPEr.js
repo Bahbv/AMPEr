@@ -199,8 +199,14 @@ var AMPEr = function () {
       } else {
         AMPEr.personalization = 0;
       }
-    }; // Buttons
+    }; // Close on escape when focus is in modal
 
+
+    modal.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        saveAndClose();
+      }
+    }); // Buttons
 
     var acceptBtn = document.getElementById("AMPEr_accept");
 

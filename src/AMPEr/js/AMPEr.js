@@ -190,6 +190,12 @@ var AMPEr = (function () {
                 AMPEr.personalization = 0;
             }
         }
+        // Close on escape when focus is in modal
+        modal.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape') {
+                saveAndClose();
+            }
+        })
         // Buttons
         const acceptBtn = document.getElementById("AMPEr_accept");
         acceptBtn.onclick = function () { acceptAllAndClose(); };
@@ -199,6 +205,7 @@ var AMPEr = (function () {
         saveBtn.onclick = function () { saveAndClose(); };
         const backBtn = document.getElementById("AMPEr_back");
         backBtn.onclick = function () { console.log("Back button..") };
+
     }
 
     /**
