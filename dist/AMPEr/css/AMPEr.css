@@ -1,0 +1,62 @@
+/* Styling for AMPEr cookie banner 
+ * 1. Variables
+ * 2. Modal
+ * 3. Toggle switch component
+ */
+/* 1. Variables */
+/* 2. Modal */
+/* 3. Toggle switch component */
+.AMPEr_switches {
+  max-width: 300px;
+  padding: 0;
+  margin: 0;
+  list-style: none; }
+  .AMPEr_switches li {
+    margin-bottom: 10px; }
+  .AMPEr_switches input {
+    position: absolute;
+    left: -9999px; }
+  .AMPEr_switches label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; }
+  .AMPEr_switches .AMPEr_switch span:last-child {
+    position: relative;
+    width: 50px;
+    height: 26px;
+    border-radius: 15px;
+    background: grey;
+    transition: all 0.3s; }
+    .AMPEr_switches .AMPEr_switch span:last-child:before {
+      content: "";
+      position: absolute;
+      left: 1px;
+      top: 1px;
+      width: 24px;
+      height: 24px;
+      background: white;
+      border-radius: 50%;
+      z-index: 1;
+      transition: transform 0.3s; }
+    .AMPEr_switches .AMPEr_switch span:last-child:after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      width: 12px;
+      height: 12px;
+      transform: translateY(-50%);
+      background: url(../svg/switch-unchecked.svg);
+      background-size: 12px 12px; }
+  .AMPEr_switches .AMPEr_switch input[disabled] + label span:last-of-type {
+    opacity: 0.5; }
+  .AMPEr_switches .AMPEr_switch input:checked + label span:last-child {
+    background: #e5007e; }
+    .AMPEr_switches .AMPEr_switch input:checked + label span:last-child:before {
+      transform: translateX(24px); }
+    .AMPEr_switches .AMPEr_switch input:checked + label span:last-child:after {
+      width: 14px;
+      height: 14px;
+      left: 8px;
+      background-image: url(../svg/switch-checked.svg);
+      background-size: 14px 14px; }

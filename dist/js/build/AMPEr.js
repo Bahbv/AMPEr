@@ -100,52 +100,50 @@ var AMPEr = function () {
   //////////////////
 
   /**
-   * Make the banner and attacht it to the body
-      * @TODO: Show settings only if there is a cookie for it
-      * @TODO: Make the information HTML
+   * Make the banner / modal, attach listeners and attacht it to the body
+   * @TODO: Show settings only if there is a cookie for it
+   * @TODO: Make the information HTML
    */
 
   var showCookieWindow = function showCookieWindow() {
     // Make the modal
     var html;
     html = '<section class="' + settings.classPrefix + '_modal" id="AMPEr_Cookies">';
-    html += '<div class="' + settings.classPrefix + '_modal_inner">'; // Home
-
+    html += '<div class="' + settings.classPrefix + '_modal_inner">';
     html += '<div id="AMPEr_modal_1">';
     html += '<h1 class="' + settings.classPrefix + '_modal_head">' + settings.lexicon[settings.language].modalTitle + '</h1>';
     html += '<p class="' + settings.classPrefix + '_modal_text">' + settings.lexicon[settings.language].modalContent + '</p>';
     html += '<div class="' + settings.classPrefix + '_modal_buttons">';
     html += '<button id="AMPEr_accept" class="' + settings.classPrefix + '_btn ' + settings.classPrefix + '_btn--accept">' + settings.lexicon[settings.language].acceptBtn + '</button>';
     html += '<button id="AMPEr_settings" class="' + settings.classPrefix + '_btn ' + settings.classPrefix + '_btn--settings">' + settings.lexicon[settings.language].settingsBtn + '</button>';
-    html += '</div></div>'; // Settings
-
-    html += '<div id="AMPEr_modal_2">'; // Essential
-
-    html += '<div class="' + settings.classPrefix + '_settings_group">';
-    html += '<label class="' + settings.classPrefix + '_switch" for="AMPEr_essential">' + settings.lexicon[settings.language].essential + ' <input type="checkbox" id="AMPEr_essential" checked disabled />';
-    html += '<div class="' + settings.classPrefix + '_slider ' + settings.classPrefix + '_slider--round"></div></label>';
-    html += '</div>'; // Analytic
-
-    html += '<div class="' + settings.classPrefix + '_settings_group">';
-    html += '<label class="' + settings.classPrefix + '_switch" for="AMPEr_analytic">' + settings.lexicon[settings.language].analytic + ' <input type="checkbox" id="AMPEr_analytic" />';
-    html += '<div class="' + settings.classPrefix + '_slider ' + settings.classPrefix + '_slider--round"></div></label>';
-    html += '</div>'; // Marketing
-
-    html += '<div class="' + settings.classPrefix + '_settings_group">';
-    html += '<label class="' + settings.classPrefix + '_switch" for="AMPEr_marketing">' + settings.lexicon[settings.language].marketing + ' <input type="checkbox" id="AMPEr_marketing" />';
-    html += '<div class="' + settings.classPrefix + '_slider ' + settings.classPrefix + '_slider--round"></div></label>';
-    html += '</div>'; // Personalization
-
-    html += '<div class="' + settings.classPrefix + '_settings_group">';
-    html += '<label class="' + settings.classPrefix + '_switch" for="AMPEr_personalization">' + settings.lexicon[settings.language].personalization + ' <input type="checkbox" id="AMPEr_personalization" />';
-    html += '<div class="' + settings.classPrefix + '_slider ' + settings.classPrefix + '_slider--round"></div></label>';
-    html += '</div>'; // Buttons
-
+    html += '</div></div>';
+    html += '<div id="AMPEr_modal_2">';
+    html += '<ul class="' + settings.classPrefix + '_switches">';
+    html += '<li class="' + settings.classPrefix + '_switch">';
+    html += '<input type="checkbox" id="AMPEr_essential" checked disabled />';
+    html += '<label for="AMPEr_essential">';
+    html += '<span>' + settings.lexicon[settings.language].essential + '</span><span></span>';
+    html += '</li>';
+    html += '<li class="' + settings.classPrefix + '_switch">';
+    html += '<input type="checkbox" id="AMPEr_analytic"/>';
+    html += '<label for="AMPEr_analytic">';
+    html += '<span>' + settings.lexicon[settings.language].analytic + '</span><span></span>';
+    html += '</li>';
+    html += '<li class="' + settings.classPrefix + '_switch">';
+    html += '<input type="checkbox" id="AMPEr_marketing" />';
+    html += '<label for="AMPEr_marketing">';
+    html += '<span>' + settings.lexicon[settings.language].marketing + '</span><span></span>';
+    html += '</li>';
+    html += '<li class="' + settings.classPrefix + '_switch">';
+    html += '<input type="checkbox" id="AMPEr_personalization" />';
+    html += '<label for="AMPEr_personalization">';
+    html += '<span>' + settings.lexicon[settings.language].personalization + '</span><span></span>';
+    html += '</li>';
+    html += '</ul>';
     html += '<div class="' + settings.classPrefix + '_modal_buttons">';
     html += '<button id="AMPEr_save" class="' + settings.classPrefix + '_btn ' + settings.classPrefix + '_btn--save">' + settings.lexicon[settings.language].saveBtn + '</button>';
     html += '<button id="AMPEr_back" class="' + settings.classPrefix + '_btn ' + settings.classPrefix + '_btn--back">' + settings.lexicon[settings.language].backBtn + '</button>';
-    html += '</div>'; // Close 
-
+    html += '</div>';
     html += '</div>';
     html += '</div></section>'; // Add the html to the body and initialize listeners
 
@@ -197,29 +195,26 @@ var AMPEr = function () {
       } else {
         AMPEr.personalization = 0;
       }
-    }; // Accept button
+    }; // Buttons
 
 
     var acceptBtn = document.getElementById("AMPEr_accept");
 
     acceptBtn.onclick = function () {
       acceptAllAndClose();
-    }; // Settings button
-
+    };
 
     var settingsBtn = document.getElementById("AMPEr_settings");
 
     settingsBtn.onclick = function () {
       showSettings();
-    }; // Save button
-
+    };
 
     var saveBtn = document.getElementById("AMPEr_save");
 
     saveBtn.onclick = function () {
       saveAndClose();
-    }; // Back button 
-
+    };
 
     var backBtn = document.getElementById("AMPEr_back");
 
@@ -244,7 +239,6 @@ var AMPEr = function () {
 
 
   var saveAndClose = function saveAndClose() {
-    // @TODO: Get values
     setCookie(settings.cookieName, AMPEr, settings.cookieDays);
 
     if (firstTime) {
@@ -252,26 +246,6 @@ var AMPEr = function () {
     }
 
     closeModal();
-  };
-  /**
-   * @TODO: Switch to the settings page, a nice animation would be nice,
-   * but maybe just use classes for now so we can style it however we want?
-   */
-
-
-  var showSettings = function showSettings() {
-    console.log("Show settings");
-  };
-  /**
-   * Closes the modal
-   * @TODO:we could use a class and a timeout to give this a nice animation,
-   * or animate it with javascript?
-   */
-
-
-  var closeModal = function closeModal() {
-    var modal = document.getElementById("AMPEr_Cookies");
-    modal.remove();
   };
   /* Accept all cookies, execute them if its the first time and close the modal */
 
@@ -287,6 +261,26 @@ var AMPEr = function () {
     }
 
     closeModal();
+  };
+  /**
+   * Closes the modal
+   * @TODO:we could use a class and a timeout to give this a nice animation,
+   * or animate it with javascript?
+   */
+
+
+  var closeModal = function closeModal() {
+    var modal = document.getElementById("AMPEr_Cookies");
+    modal.remove();
+  };
+  /**
+   * @TODO: Switch to the settings page, a nice animation would be nice,
+   * but maybe just use classes for now so we can style it however we want?
+   */
+
+
+  var showSettings = function showSettings() {
+    console.log("Show settings");
   };
   /**
    * Set a cookie 
@@ -330,7 +324,7 @@ var AMPEr = function () {
 
     return null;
   }; //////////////////
-  // Initialize
+  // Public methods
   //////////////////
 
   /**
@@ -359,10 +353,7 @@ var AMPEr = function () {
     if (!firstTime) {
       execute();
     }
-  }; //////////////////
-  // Public methods
-  //////////////////
-
+  };
   /**
    * Add the modal to the html
    */

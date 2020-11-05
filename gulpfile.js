@@ -21,12 +21,17 @@ const paths = {
   },
   html: {
     src: ["./index.html"],
+  },
+  AMPEr: {
+    scss: ['./src/AMPEr/scss/AMPEr.scss'],
+    scss_dest: "./dist/AMPEr/css/",
+    js: ["./src/AMPEr/js/AMPEr.js"],
   }
 };
 
 /* Process the styles */
 function processStyles(done) {
-  return gulp.series(style, done => {
+  return gulp.series(style, amperStyle,  done => {
     done();
   })(done);
 }
@@ -41,10 +46,21 @@ function style() {
     .pipe(browserSync.stream());
 }
 
+function amperStyle() {
+  return gulp
+    .src(paths.AMPEr.scss)
+    .pipe(sass())
+    .on("error", sass.logError)
+    .pipe(postcss([autoprefixer()])) 
+    .pipe(gulp.dest(paths.AMPEr.scss_dest))
+    .pipe(browserSync.stream());
+}
+
 /* Process the scripts */
 function processScripts(done) {
   return gulp.series(
     preprocessJs,
+    preprocessAmperJs,
     concatJs,
     reload,
     done => {
@@ -63,6 +79,18 @@ function preprocessJs() {
       })
     )
     .pipe(gulp.dest("./dist/js/build/"));
+}
+
+function preprocessAmperJs() {
+  return gulp
+    .src(paths.AMPEr.js)
+    .pipe(
+      babel({
+        presets: ["@babel/env"],
+        plugins: ["@babel/plugin-proposal-class-properties"]
+      })
+    )
+    .pipe(gulp.dest("./dist/AMPEr/js/"));
 }
 
 function concatJs() {
@@ -91,7 +119,9 @@ function watch() {
     }
   });
   gulp.watch(paths.styles.all, processStyles);
+  gulp.watch(paths.AMPEr.scss, processStyles);
   gulp.watch(paths.scripts.src, processScripts);
+  gulp.watch(paths.AMPEr.js, processScripts);
   gulp.watch(paths.html.src, reload);
 
 }
