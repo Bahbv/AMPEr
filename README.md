@@ -82,9 +82,6 @@ You can also add other languages if needed.
 ```
 
 # Public functions
-
-
-# Accessibility
 `AMPEr.init(options)` Initialize the cookiebanner with options specified above.  
 `AMPEr.openModal()` Renders the modal / appends the modal before the closing </body>
 `AMPEr.getConsent(category)` Returns true or false if consent is given for the category, available categorys are "analytic", "marketing" and "personalization".   
@@ -92,7 +89,7 @@ You can also add other languages if needed.
 `AMPEr.marketing(boolean)` Sets content true or false for the marketing cookies, doesn't fire the callback.    
 `AMPEr.personalization(boolean)` Sets content true or false for the personalization cookies, doesn't fire the callback.    
 
-
+# Accessibility
 ### What i did
 I tried to make the banner as accesible as possible.  
 The focus changes to the modal when opening, the modal has correct role, labeledby and descripedby.  
