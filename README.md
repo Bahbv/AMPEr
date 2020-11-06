@@ -1,4 +1,4 @@
-# ![AMPEr logo](https://raw.githubusercontent.com/Bahbv/AMPEr/master/src/AMPEr/svg/roze-koek.svg?token=ADA247LVPJVTGTNPQWJ2APS7UVYAM | width=100) AMPEr
+# <img src="https://raw.githubusercontent.com/Bahbv/AMPEr/master/src/AMPEr/svg/roze-koek.svg?token=ADA247LVPJVTGTNPQWJ2APS7UVYAM" width="30" height="30"> AMPEr
 AMPEr is a vanilla js cookiebanner compliant with the EU GDPR.  
 (A)nalytic (M)arketing (P)ersonalization (E)ssential rozekoek.
 
