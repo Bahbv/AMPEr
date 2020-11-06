@@ -87,17 +87,17 @@ You can also add other languages if needed.
 # Accessibility
 `AMPEr.init(options)` Initialize the cookiebanner with options specified above.  
 `AMPEr.openModal()` Renders the modal / appends the modal before the closing </body>
-`AMPEr.getConsent(category)` Returns true or false if consent is given for the category, available categorys are "analytic", "marketing" and "personalization".  
-`AMPEr.analytic(boolean)` Sets content true or false for the analytic cookies, doesn't fire the callback.  
-`AMPEr.marketing(boolean)` Sets content true or false for the marketing cookies, doesn't fire the callback.  
-`AMPEr.personalization(boolean)` Sets content true or false for the personalization cookies, doesn't fire the callback.  
+`AMPEr.getConsent(category)` Returns true or false if consent is given for the category, available categorys are "analytic", "marketing" and "personalization".   
+`AMPEr.analytic(boolean)` Sets content true or false for the analytic cookies, doesn't fire the callback.    
+`AMPEr.marketing(boolean)` Sets content true or false for the marketing cookies, doesn't fire the callback.    
+`AMPEr.personalization(boolean)` Sets content true or false for the personalization cookies, doesn't fire the callback.    
 
 
 ### What i did
-I tried to make the banner as accesible as possible.
-The focus changes to the modal when opening, the modal has correct role, labeledby and descripedby.
-.sr-only class is included in the css to make some text visually hidden an accesible by screen readers.
-I also make use of a little script that sets using-mouse to the <html> so focus styles aren't visible when the mouse is being used.
+I tried to make the banner as accesible as possible.  
+The focus changes to the modal when opening, the modal has correct role, labeledby and descripedby.  
+.sr-only class is included in the css to make some text visually hidden an accesible by screen readers.  
+I also make use of a little script that sets using-mouse to the <html> so focus styles aren't visible when the mouse is being used.  
   
 ### Using mouse script
 ```js
