@@ -20,5 +20,8 @@
     "gulp-sass": "^4.1.0",
     "gulp-concat": "^2.6.1",
     "postcss": "^8.0.8"
+  },
+  "dependencies": {
+    "focus-visible": "^5.2.0"
   }
 }

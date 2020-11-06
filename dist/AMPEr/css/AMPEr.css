@@ -1,12 +1,12 @@
 /* Styling for AMPEr cookie banner 
- * 1. Variables
+ * 1. Variables and functions
  * 2. Helpers
  * 3. Modal
  * 4. Buttons and icon's
  * 5. Toggle switch component
  */
 /* 1. Variables */
-/* 2. Helpers ( Maybe this is also included, but heck .. )*/
+/* 2. Helpers ( Maybe this is already included, but heck .. )*/
 .sr-only {
   border: 0 !important;
   clip: rect(1px, 1px, 1px, 1px) !important;
@@ -20,6 +20,14 @@
   width: 1px !important;
   white-space: nowrap !important; }
 
+html.using-mouse :focus {
+  outline: none !important;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important; }
+
+html.using-mouse :focus + label span:last-child {
+  outline: none !important;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0) !important; }
+
 /* 3. Modal */
 .AMPEr_modal {
   max-width: 22rem;
@@ -28,39 +36,61 @@
   left: 1rem;
   background-color: white;
   padding: 1rem;
-  border-radius: 10px; }
+  border-radius: 0.625rem; }
   .AMPEr_modal_head {
     margin: 0;
     font-size: 2rem; }
 
 /* 4. Buttons and icon's */
 .AMPEr_modal_buttons button {
-  margin-right: 0.625rem; }
+  margin-right: 0.425rem; }
 
 .AMPEr_modal_buttons button:last-of-type {
   margin-right: 0; }
 
+.AMPEr_modal_buttons {
+  display: flex; }
+
 .AMPEr_btn {
-  display: inline-block;
+  display: block;
   border: none;
   padding: 0.5rem 1rem;
   margin: 0;
   text-decoration: none;
-  background: #0069ed;
+  background: #e50086;
   color: #ffffff;
   font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   text-align: center;
+  border-radius: 0.3125rem;
   transition: background 250ms ease-in-out,  transform 150ms ease;
   -webkit-appearance: none;
   -moz-appearance: none; }
   .AMPEr_btn:hover, .AMPEr_btn:focus {
-    background: #0053ba; }
+    background: #cc0077; }
   .AMPEr_btn:focus {
-    outline: 1px solid #fff;
-    outline-offset: -4px; }
+    outline: 0;
+    box-shadow: 0 0 0 0.1875rem black; }
   .AMPEr_btn:active {
     transform: scale(0.99); }
+  .AMPEr_btn--settings, .AMPEr_btn--back {
+    padding: 0.425rem 0.425rem;
+    background: transparent;
+    border: 0.125rem solid #e50086;
+    color: #e50086; }
+    .AMPEr_btn--settings:hover, .AMPEr_btn--settings:focus, .AMPEr_btn--back:hover, .AMPEr_btn--back:focus {
+      background: transparent;
+      border-color: #cc0077;
+      color: #cc0077; }
+      .AMPEr_btn--settings:hover i svg, .AMPEr_btn--settings:focus i svg, .AMPEr_btn--back:hover i svg, .AMPEr_btn--back:focus i svg {
+        fill: #cc0077; }
+
+.AMPEr_icon--gear svg {
+  display: block;
+  fill: #e50086;
+  width: auto;
+  height: 1.2rem; }
 
 /* 5. Toggle switch component */
 .AMPEr_switches {
@@ -86,8 +116,8 @@
     .AMPEr_switches .AMPEr_switch span:last-child:before {
       content: "";
       position: absolute;
-      left: 1px;
-      top: 1px;
+      left: 0.0625rem;
+      top: 0.0625rem;
       width: 1.5rem;
       height: 1.5rem;
       background: white;
@@ -107,7 +137,7 @@
   .AMPEr_switches .AMPEr_switch input[disabled] + label span:last-of-type {
     opacity: 0.5; }
   .AMPEr_switches .AMPEr_switch input:checked + label span:last-child {
-    background: #e5007e; }
+    background: #e50086; }
     .AMPEr_switches .AMPEr_switch input:checked + label span:last-child:before {
       transform: translateX(1.5rem); }
     .AMPEr_switches .AMPEr_switch input:checked + label span:last-child:after {
@@ -116,3 +146,15 @@
       left: 0.5rem;
       background-image: url(../svg/switch-checked.svg);
       background-size: 0.875rem 0.875rem; }
+  .AMPEr_switches .AMPEr_switch:hover span:last-child {
+    background: #737373; }
+  .AMPEr_switches .AMPEr_switch:hover input:checked + label span:last-child {
+    background: #cc0077; }
+  .AMPEr_switches .AMPEr_switch input:focus + label span:last-child {
+    background: #737373;
+    outline: 0;
+    box-shadow: 0 0 0 0.1875rem black; }
+  .AMPEr_switches .AMPEr_switch input:checked:focus + label span:last-child {
+    background: #cc0077;
+    outline: 0;
+    box-shadow: 0 0 0 0.1875rem black; }
