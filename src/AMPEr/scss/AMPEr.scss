@@ -1,12 +1,26 @@
+/**
+ * AMPEr.scss
+ *
+ * AMPEr is a vanilla js cookiebanner compliant with eu gdpr.
+ * (A)nalytic (M)arketing (P)ersonalization (E)ssential rozekoek.
+ * 
+ * @version     1.0
+ * @license     http://www.opensource.org/licenses/mit-license.html MIT License
+ * @author      Bob Vrijland <bob@bahbv.net>
+ * @updated     06-11-2020
+ * @link        https://github.com/Bahbv
+ */
+
 /* Styling for AMPEr cookie banner 
  * 1. Variables and functions
  * 2. Helpers
  * 3. Modal
  * 4. Buttons and icon's
  * 5. Toggle switch component
+ * 6. Transition
  */
 
-/* 1. Variables */
+// 1. Variables and functions 
 
 // Function for converting a px based font-size to rem.
 @function rem($size) {
@@ -22,7 +36,7 @@
 
 // Variables
 $knob-color: white;
-$active-color: #e50086;
+$active-color:  #f776bb;
 $inactive-color: grey;
 
 /* 2. Helpers ( Maybe this is already included, but heck .. )*/
@@ -52,10 +66,11 @@ html.using-mouse :focus + label span:last-child {
 
 /* 3. Modal */
 .AMPEr_modal {
-    max-width: 22rem;
+    width: calc(100% - 2rem);
     position: fixed;
     bottom: 1rem;
     left: 1rem;
+    margin-right: 1rem;
 
     background-color: white;
     padding: 1rem;
@@ -63,22 +78,35 @@ html.using-mouse :focus + label span:last-child {
 
     &_head {
         margin: 0;
+        color: $active-color;
         font-size: 2rem;
+        display:flex;
+        align-items: center;
+    }
+
+    &_text {
+        margin: 1rem 0;
+    }
+}
+
+@media screen and (min-width:480px){
+    .AMPEr_modal {
+        width: 22rem;
+        margin-right: 0;
     }
 }
 
 /* 4. Buttons and icon's */
 .AMPEr_modal_buttons {
+    display: flex;
+    margin-top: 2rem;
+
     button {
         margin-right: 0.425rem;
     }
     button:last-of-type {
         margin-right: 0;
     }
-}
-
-.AMPEr_modal_buttons {
-    display: flex;
 }
 
 .AMPEr_btn {
@@ -114,7 +142,7 @@ html.using-mouse :focus + label span:last-child {
     }
 
     &--settings,
-    &--back {
+    &--info {
         padding: 0.425rem 0.425rem;
         background: transparent;
         border: rem(2px) solid $active-color;
@@ -142,17 +170,36 @@ html.using-mouse :focus + label span:last-child {
     height: 1.2rem;
 }
 
+.AMPEr_icon--rozekoek {
+    display:inline-block;
+    background-image:url("../svg/roze-koek.svg");
+    background-size: 2rem 2rem;
+    width: 2rem;
+    height: 2rem;
+    margin-right: 0.8rem;
+}
+
 /* 5. Toggle switch component */
 .AMPEr_switches {
-    // temp layout
-    li {
-        margin-bottom: 0.625rem;
-    }
-
     // Remove default list style
     padding: 0;
-    margin: 0;
     list-style: none;
+
+    // Layout and font
+    margin: 1rem 0;
+
+    li {
+        margin-bottom: 0.625rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+
+        small {
+            display:block;
+            font-size: 0.8rem;
+            color: rgb(95, 95, 95);
+        }
+    }
+
     // Hide default input
     input {
         position: absolute;
@@ -240,5 +287,22 @@ html.using-mouse :focus + label span:last-child {
             box-shadow: 0 0 0 rem(3px) rgba(0, 0, 0, 1);
         }
 
+    }
+}
+
+/* 6. Transition */
+#AMPEr_modal_1 {
+    display: none;
+
+    &.AMPEr--active {
+        display: block;
+    }
+}
+
+#AMPEr_modal_2 {
+    display: none;
+
+    &.AMPEr--active {
+        display: block;
     }
 }

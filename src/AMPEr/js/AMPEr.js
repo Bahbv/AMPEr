@@ -1,8 +1,16 @@
-/*!
- * AMPEr
- * Vanilla javascript cookie banner compliant with the EU GDPR
- * (c) 2020 Bob Vrijland, MIT License, https://github.com/bahbv 
+/**
+ * AMPEr.js
+ *
+ * AMPEr is a vanilla js cookiebanner compliant with eu gdpr.
+ * (A)nalytic (M)arketing (P)ersonalization (E)ssential rozekoek.
+ * 
+ * @version     1.0
+ * @license     http://www.opensource.org/licenses/mit-license.html MIT License
+ * @author      Bob Vrijland <bob@bahbv.net>
+ * @updated     06-11-2020
+ * @link        https://github.com/Bahbv
  */
+
 var AMPEr = (function () {
 
     'use strict';
@@ -16,6 +24,8 @@ var AMPEr = (function () {
     let firstFocusedElement;
     let firstTime = false;
     let modal;
+    let modal1;
+    let modal2;
     // Cookie object
     let AMPEr = {
         analytic: 1,
@@ -27,69 +37,46 @@ var AMPEr = (function () {
         cookieName: "AMPEr",
         cookieDays: 365,
         classPrefix: "AMPEr",
+        debugMode: false,
         language: "en",
         lexicon: {
             en: {
-                modalTitle: "<i class='AMPEr_icon--rozekoek' aria-hidden='true'></i>Cookies?",
-                modalContent: "This is body text for giving a little bit more information about cookies in the modal ENGELS",
+                modalTitle: "<i class='AMPEr_icon--rozekoek' aria-hidden='true'></i>Cookies!",
+                modalContent: "In order to deliver a personalised, responsive service and to improve the site, we remember and store information about how you use it. You can always opt out of them in the settings.",
                 acceptBtn: "Accept all <span class='sr-only'>cookies and close this popup.</span>",
                 settingsBtn: "<span class='sr-only'>Adjust cookie Settings</span><i class='AMPEr_icon--gear' aria-hidden='true'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M24 13.616v-3.232c-1.651-.587-2.694-.752-3.219-2.019v-.001c-.527-1.271.1-2.134.847-3.707l-2.285-2.285c-1.561.742-2.433 1.375-3.707.847h-.001c-1.269-.526-1.435-1.576-2.019-3.219h-3.232c-.582 1.635-.749 2.692-2.019 3.219h-.001c-1.271.528-2.132-.098-3.707-.847l-2.285 2.285c.745 1.568 1.375 2.434.847 3.707-.527 1.271-1.584 1.438-3.219 2.02v3.232c1.632.58 2.692.749 3.219 2.019.53 1.282-.114 2.166-.847 3.707l2.285 2.286c1.562-.743 2.434-1.375 3.707-.847h.001c1.27.526 1.436 1.579 2.019 3.219h3.232c.582-1.636.75-2.69 2.027-3.222h.001c1.262-.524 2.12.101 3.698.851l2.285-2.286c-.744-1.563-1.375-2.433-.848-3.706.527-1.271 1.588-1.44 3.221-2.021zm-12 2.384c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z'/></svg></i>",
+                settingsTitle: "<i class='AMPEr_icon--rozekoek' aria-hidden='true'></i>Settings",
                 saveBtn: "Save <span class='sr-only'>cookie settings and close the this popup.</span>",
-                backBtn: "Back <span class='sr-only'>to first screen.</span>",
+                infoBtn: "More info <span class='sr-only'>about cookies</span>",
+                infoPage: "/cookie-disclaimer",
                 analytic: "Analytic cookies",
+                analyticInfo: "For analysing traffic and usage",
                 marketing: "Marketing cookies",
+                marketingInfo: "For personalised ads",
                 personalization: "Personalization cookies",
+                personalizationInfo: "For saving user preference and settings",
                 essential: "Functional cookies",
+                essentialInfo: "Necessary for a working site",
             },
             nl: {
-                modalTitle: "<i class='AMPEr_icon--rozekoek' aria-hidden='true'></i>Cookies?",
-                modalContent: "Dit is body tekst voor een klein beetje tekst met wat extra informatie in de cookiemodal NEDERLANDS.",
+                modalTitle: "<i class='AMPEr_icon--rozekoek' aria-hidden='true'></i>Cookies!",
+                modalContent: "Om een gepersonaliseerde, responsieve service te kunnen leveren en om de site te verbeteren, onthouden we informatie over hoe u deze site gebruikt en slaan we deze op. U kunt zich er altijd voor afmelden in de instellingen.",
                 acceptBtn: "Accepteer alles <span class='sr-only'>qua cookies en sluit deze popup.</span>",
                 saveBtn: "<span class='sr-only'>Instellingen</span> Opslaan <span class='sr-only'>en deze popup sluiten.</span>",
-                backBtn: "Terug <span class='sr-only'>Naar het vorige scherm</span>",
+                infoBtn: "Meer info <span class='sr-only'>over cookies</span>",
+                infoPage: "/nl/cookie-disclaimer",
                 settingsBtn: "<span class='sr-only'>Cookie instellingen wijzigen</span><i class='AMPEr_icon--gear' aria-hidden='true'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M24 13.616v-3.232c-1.651-.587-2.694-.752-3.219-2.019v-.001c-.527-1.271.1-2.134.847-3.707l-2.285-2.285c-1.561.742-2.433 1.375-3.707.847h-.001c-1.269-.526-1.435-1.576-2.019-3.219h-3.232c-.582 1.635-.749 2.692-2.019 3.219h-.001c-1.271.528-2.132-.098-3.707-.847l-2.285 2.285c.745 1.568 1.375 2.434.847 3.707-.527 1.271-1.584 1.438-3.219 2.02v3.232c1.632.58 2.692.749 3.219 2.019.53 1.282-.114 2.166-.847 3.707l2.285 2.286c1.562-.743 2.434-1.375 3.707-.847h.001c1.27.526 1.436 1.579 2.019 3.219h3.232c.582-1.636.75-2.69 2.027-3.222h.001c1.262-.524 2.12.101 3.698.851l2.285-2.286c-.744-1.563-1.375-2.433-.848-3.706.527-1.271 1.588-1.44 3.221-2.021zm-12 2.384c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z'/></svg></i>",
+                settingsTitle: "<i class='AMPEr_icon--rozekoek' aria-hidden='true'></i>Instellingen",
                 analytic: "Analytische cookies",
+                analyticInfo: "Analyseren het verkeer en gebruik",
                 marketing: "Marketing cookies",
+                marketingInfo: "Voor persoonlijke advertenties",
                 personalization: "Personalisatie cookies",
+                personalizationInfo: "Slaan voorkeuren en instellingen op",
                 essential: "Functionele cookies",
+                essentialInfo: "Zijn noodzakelijk voor een werkende site",
             },
         },
-        // @TODO: Maak onderstaande cookie configuratie multilingual en misschien een ander bestand zodat het makkelijk aan te passen is ipv inline
-        cookies: {
-            analytic: {
-                vb1: {
-                    name: "Analytic cookie",
-                    provider: "Provider",
-                    duration: "Sessie",
-                    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s"
-                },
-            },
-            marketing: {
-                vb2: {
-                    name: "Marketing cookie",
-                    provider: "Wij zelf",
-                    duration: "Sessie",
-                    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                },
-            },
-            personalization: {
-                vb3: {
-                    name: "Personalization cookie",
-                    provider: "Wij zelf",
-                    duration: "Sessie",
-                    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
-                },
-            },
-            essential: {
-                amper: {
-                    name: "AMPEr",
-                    provider: "Wij zelf",
-                    duration: "365 Dagen",
-                    description: "Deze cookie onthoud jouw voorkeuren voor cookies. Heel dubbel maar deze cookie is dus noodzakelijk als je geen cookies wilt!",
-                },
-            },
-        },
-
         analyticCallback: function () {
             console.log("Consent for analytic cookies!");
         },
@@ -106,17 +93,14 @@ var AMPEr = (function () {
     //////////////////
 
     /**
-     * Make the banner / modal, attach listeners and attacht it to the body
-     * @TODO: Switch to settings and back, make it accesible with a focus switch?
-     * @TODO: Show settings only if there is a cookie for it ??
-     * @TODO: Make the information HTML ?
+     * Render the banner / modal, attach listeners and attach it to the body
      */
     const showCookieWindow = function () {
-        // Make the modal 
         let html;
+
         html = '<div class="' + settings.classPrefix + '_modal" id="AMPEr_Cookies" role="dialog" aria-labelledby="AMPEr_title" aria-describedby="AMPEr_description">';
         html += '<div class="' + settings.classPrefix + '_modal_inner">';
-        html += '<div id="AMPEr_modal_1">';
+        html += '<div id="AMPEr_modal_1" class="AMPEr--active">';
         html += '<h2 class="' + settings.classPrefix + '_modal_head" id="AMPEr_title">' + settings.lexicon.[settings.language].modalTitle + '</h2>'
         html += '<p class="' + settings.classPrefix + '_modal_text" id="AMPEr_description">' + settings.lexicon.[settings.language].modalContent + '</p>'
         html += '<div class="' + settings.classPrefix + '_modal_buttons">';
@@ -124,41 +108,45 @@ var AMPEr = (function () {
         html += '<button id="AMPEr_settings" class="' + settings.classPrefix + '_btn ' + settings.classPrefix + '_btn--settings">' + settings.lexicon.[settings.language].settingsBtn + '</button>';
         html += '</div></div>';
         html += '<div id="AMPEr_modal_2">';
+        html += '<h2 class="' + settings.classPrefix + '_modal_head">' + settings.lexicon.[settings.language].settingsTitle + '</h2>';
         html += '<ul class="'+ settings.classPrefix +'_switches">';
         html += '<li class="'+ settings.classPrefix +'_switch">';
         html += '<input type="checkbox" id="AMPEr_essential" checked disabled />';
         html += '<label for="AMPEr_essential">';
-        html += '<span>' + settings.lexicon.[settings.language].essential + '</span><span></span>';
+        html += '<span>' + settings.lexicon.[settings.language].essential + '<small>'+ settings.lexicon.[settings.language].essentialInfo +'</small></span><span></span>';
         html += '</li>'
         html += '<li class="'+ settings.classPrefix +'_switch">';
         html += '<input type="checkbox" id="AMPEr_analytic"/>';
         html += '<label for="AMPEr_analytic">';
-        html += '<span>' + settings.lexicon.[settings.language].analytic + '</span><span></span>';
+        html += '<span>' + settings.lexicon.[settings.language].analytic + '<small>'+ settings.lexicon.[settings.language].analyticInfo +'</small></span><span></span>';
         html += '</li>'
         html += '<li class="'+ settings.classPrefix +'_switch">';
         html += '<input type="checkbox" id="AMPEr_marketing" />';
         html += '<label for="AMPEr_marketing">';
-        html += '<span>' + settings.lexicon.[settings.language].marketing + '</span><span></span>';
+        html += '<span>' + settings.lexicon.[settings.language].marketing + '<small>'+ settings.lexicon.[settings.language].marketingInfo +'</small></span><span></span>';
         html += '</li>'
         html += '<li class="'+ settings.classPrefix +'_switch">';
         html += '<input type="checkbox" id="AMPEr_personalization" />';
         html += '<label for="AMPEr_personalization">';
-        html += '<span>' + settings.lexicon.[settings.language].personalization + '</span><span></span>';
+        html += '<span>' + settings.lexicon.[settings.language].personalization + '<small>'+ settings.lexicon.[settings.language].personalizationInfo +'</small></span><span></span>';
         html += '</li>'
         html += '</ul>';
         html += '<div class="' + settings.classPrefix + '_modal_buttons">';
         html += '<button id="AMPEr_save" class="' + settings.classPrefix + '_btn ' + settings.classPrefix + '_btn--save">' + settings.lexicon.[settings.language].saveBtn + '</button>';
-        html += '<button id="AMPEr_back" class="' + settings.classPrefix + '_btn ' + settings.classPrefix + '_btn--back">' + settings.lexicon.[settings.language].backBtn + '</button>';
+        html += '<button id="AMPEr_info" class="' + settings.classPrefix + '_btn ' + settings.classPrefix + '_btn--info">' + settings.lexicon.[settings.language].infoBtn + '</button>';
         html += '</div>';
         html += '</div>';
         html += '</div></div>';
+        
         document.body.insertAdjacentHTML('beforeend', html);
         modal = document.getElementById('AMPEr_Cookies');
-
         setFocus();
         addModalListeners();
     };
 
+    /**
+     * Adds all the functions for the checkboxes, buttons and keydown's
+     */
     const addModalListeners = function () {
         // Analytic checkbox
         const analyticSwitch = document.getElementById("AMPEr_analytic");
@@ -203,9 +191,8 @@ var AMPEr = (function () {
         settingsBtn.onclick = function () { showSettings(); };
         const saveBtn = document.getElementById("AMPEr_save");
         saveBtn.onclick = function () { saveAndClose(); };
-        const backBtn = document.getElementById("AMPEr_back");
-        backBtn.onclick = function () { console.log("Back button..") };
-
+        const infoBtn = document.getElementById("AMPEr_info");
+        infoBtn.onclick = function () {  window.location = settings.lexicon.[settings.language].infoPage; };
     }
 
     /**
@@ -239,8 +226,6 @@ var AMPEr = (function () {
 
     /**
      * Closes the modal and set the focus where it was
-     * @TODO:we could use a class and a timeout to give this a nice animation,
-     * or animate it with javascript?
      */
     const closeModal = function () {
         const modal = document.getElementById("AMPEr_Cookies");
@@ -250,11 +235,17 @@ var AMPEr = (function () {
 
 
     /**
-     * @TODO: Switch to the settings page, a nice animation would be nice,
-     * but maybe just use classes for now so we can style it however we want?
+     * Shows the settings content, sets focus to it
+     * and hides the initial content 
      */
     const showSettings = function () {
-        console.log("Show settings");
+        modal1 = document.getElementById("AMPEr_modal_1");
+        modal2 = document.getElementById("AMPEr_modal_2");
+
+        modal1.classList.remove("AMPEr--active");
+        modal2.classList.add("AMPEr--active");
+
+        setFocusSettings();
     }
 
 
@@ -302,12 +293,23 @@ var AMPEr = (function () {
         firstFocusableElement.focus();
     }
 
+    /**
+     * Sets the focus to the first focusable element in #AMPEr_modal_2
+     */
+    const setFocusSettings = function (){
+        let focusableElements = modal2.querySelectorAll('a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex="0"]');
+        focusableElements = Array.prototype.slice.call(focusableElements);
+        const firstFocusableElement = focusableElements[0];
+        firstFocusableElement.focus();
+    }
+
     //////////////////
     // Public methods
     //////////////////
 
     /**
      * Initialize AMPEr
+     * @param {object} options 
      */
     publicMethod.init = function (options) {
         // Merge settings with defaults

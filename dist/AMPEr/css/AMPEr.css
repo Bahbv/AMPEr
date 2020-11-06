@@ -1,11 +1,16 @@
+/*!
+ * AMPEr
+ * Vanilla javascript cookie banner compliant with the EU GDPR
+ * (c) 2020 Bob Vrijland, MIT License, https://github.com/bahbv 
+ */
 /* Styling for AMPEr cookie banner 
  * 1. Variables and functions
  * 2. Helpers
  * 3. Modal
  * 4. Buttons and icon's
  * 5. Toggle switch component
+ * 6. Transition
  */
-/* 1. Variables */
 /* 2. Helpers ( Maybe this is already included, but heck .. )*/
 .sr-only {
   border: 0 !important;
@@ -30,26 +35,36 @@ html.using-mouse :focus + label span:last-child {
 
 /* 3. Modal */
 .AMPEr_modal {
-  max-width: 22rem;
+  width: calc(100% - 2rem);
   position: fixed;
   bottom: 1rem;
   left: 1rem;
+  margin-right: 1rem;
   background-color: white;
   padding: 1rem;
   border-radius: 0.625rem; }
   .AMPEr_modal_head {
     margin: 0;
-    font-size: 2rem; }
+    color: #f776bb;
+    font-size: 2rem;
+    display: flex;
+    align-items: center; }
+  .AMPEr_modal_text {
+    margin: 1rem 0; }
+
+@media screen and (min-width: 480px) {
+  .AMPEr_modal {
+    width: 22rem;
+    margin-right: 0; } }
 
 /* 4. Buttons and icon's */
-.AMPEr_modal_buttons button {
-  margin-right: 0.425rem; }
-
-.AMPEr_modal_buttons button:last-of-type {
-  margin-right: 0; }
-
 .AMPEr_modal_buttons {
-  display: flex; }
+  display: flex;
+  margin-top: 2rem; }
+  .AMPEr_modal_buttons button {
+    margin-right: 0.425rem; }
+  .AMPEr_modal_buttons button:last-of-type {
+    margin-right: 0; }
 
 .AMPEr_btn {
   display: block;
@@ -57,7 +72,7 @@ html.using-mouse :focus + label span:last-child {
   padding: 0.5rem 1rem;
   margin: 0;
   text-decoration: none;
-  background: #e50086;
+  background: #f776bb;
   color: #ffffff;
   font-size: 1rem;
   font-weight: 600;
@@ -68,37 +83,51 @@ html.using-mouse :focus + label span:last-child {
   -webkit-appearance: none;
   -moz-appearance: none; }
   .AMPEr_btn:hover, .AMPEr_btn:focus {
-    background: #cc0077; }
+    background: #f65eaf; }
   .AMPEr_btn:focus {
     outline: 0;
     box-shadow: 0 0 0 0.1875rem black; }
   .AMPEr_btn:active {
     transform: scale(0.99); }
-  .AMPEr_btn--settings, .AMPEr_btn--back {
+  .AMPEr_btn--settings, .AMPEr_btn--info {
     padding: 0.425rem 0.425rem;
     background: transparent;
-    border: 0.125rem solid #e50086;
-    color: #e50086; }
-    .AMPEr_btn--settings:hover, .AMPEr_btn--settings:focus, .AMPEr_btn--back:hover, .AMPEr_btn--back:focus {
+    border: 0.125rem solid #f776bb;
+    color: #f776bb; }
+    .AMPEr_btn--settings:hover, .AMPEr_btn--settings:focus, .AMPEr_btn--info:hover, .AMPEr_btn--info:focus {
       background: transparent;
-      border-color: #cc0077;
-      color: #cc0077; }
-      .AMPEr_btn--settings:hover i svg, .AMPEr_btn--settings:focus i svg, .AMPEr_btn--back:hover i svg, .AMPEr_btn--back:focus i svg {
-        fill: #cc0077; }
+      border-color: #f65eaf;
+      color: #f65eaf; }
+      .AMPEr_btn--settings:hover i svg, .AMPEr_btn--settings:focus i svg, .AMPEr_btn--info:hover i svg, .AMPEr_btn--info:focus i svg {
+        fill: #f65eaf; }
 
 .AMPEr_icon--gear svg {
   display: block;
-  fill: #e50086;
+  fill: #f776bb;
   width: auto;
   height: 1.2rem; }
+
+.AMPEr_icon--rozekoek {
+  display: inline-block;
+  background-image: url("../svg/roze-koek.svg");
+  background-size: 2rem 2rem;
+  width: 2rem;
+  height: 2rem;
+  margin-right: 0.8rem; }
 
 /* 5. Toggle switch component */
 .AMPEr_switches {
   padding: 0;
-  margin: 0;
-  list-style: none; }
+  list-style: none;
+  margin: 1rem 0; }
   .AMPEr_switches li {
-    margin-bottom: 0.625rem; }
+    margin-bottom: 0.625rem;
+    font-size: 1.1rem;
+    font-weight: 600; }
+    .AMPEr_switches li small {
+      display: block;
+      font-size: 0.8rem;
+      color: #5f5f5f; }
   .AMPEr_switches input {
     position: absolute;
     left: -9999px; }
@@ -137,7 +166,7 @@ html.using-mouse :focus + label span:last-child {
   .AMPEr_switches .AMPEr_switch input[disabled] + label span:last-of-type {
     opacity: 0.5; }
   .AMPEr_switches .AMPEr_switch input:checked + label span:last-child {
-    background: #e50086; }
+    background: #f776bb; }
     .AMPEr_switches .AMPEr_switch input:checked + label span:last-child:before {
       transform: translateX(1.5rem); }
     .AMPEr_switches .AMPEr_switch input:checked + label span:last-child:after {
@@ -149,12 +178,23 @@ html.using-mouse :focus + label span:last-child {
   .AMPEr_switches .AMPEr_switch:hover span:last-child {
     background: #737373; }
   .AMPEr_switches .AMPEr_switch:hover input:checked + label span:last-child {
-    background: #cc0077; }
+    background: #f65eaf; }
   .AMPEr_switches .AMPEr_switch input:focus + label span:last-child {
     background: #737373;
     outline: 0;
     box-shadow: 0 0 0 0.1875rem black; }
   .AMPEr_switches .AMPEr_switch input:checked:focus + label span:last-child {
-    background: #cc0077;
+    background: #f65eaf;
     outline: 0;
     box-shadow: 0 0 0 0.1875rem black; }
+
+/* 6. Transition */
+#AMPEr_modal_1 {
+  display: none; }
+  #AMPEr_modal_1.AMPEr--active {
+    display: block; }
+
+#AMPEr_modal_2 {
+  display: none; }
+  #AMPEr_modal_2.AMPEr--active {
+    display: block; }
