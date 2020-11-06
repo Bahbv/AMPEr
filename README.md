@@ -6,8 +6,8 @@ A roze koek ("pink cake") is a typical Dutch pastry. It consists of a small flat
 
 # Usage
 ### Modifying source
-I've used NPM and gulp while making this  
-Too make some changes you can clone the repo do a `npm install` and `gulp` to build the project and serve it with browsersync  
+I've used NPM and gulp while making this.   
+If you want to make changes you can clone the repo, do a `npm install` and execute `gulp` to build the project and serve it with browsersync.    
 
 ### Adding to site
 Put the dist/AMPEr folder somewhere on your webhost or CDN.  
@@ -19,8 +19,12 @@ Add AMPEr.js and AMPEr.css to your page like this
 Initialize amper with the following script
 ```js
 AMPEr.init({
-  // Options here ..
+  debugMode: true,
+  // More options here ..
 });
 ```
 
+# Default options
+You can use the following options.  
+`cookieName` 
 
