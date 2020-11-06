@@ -32,9 +32,9 @@ You can use the following options.
 `debugMode` default: false // Change this to true if you want to open the modal every pageload.  
 `language` default: "en" // What language from the lexicon we want to use.  
 `lexicon` // see below for more information.  
-`analyticCallback` default: `function () { console.log("Consent for analytic cookies!");` // Triggers when it has consent for analytic cookies
-`marketingCallback` default: `function () { console.log("Consent for marketing cookies!");` // Triggers when it has consent for marketing cookies
-`personalizationCallback` default: `function () { console.log("Consent for personalization cookies!");` // Triggers when it has consent for personalization cookies
+`analyticCallback` default: `function () { console.log("Consent for analytic cookies!");` // Triggers when it has consent for analytic cookies.    
+`marketingCallback` default: `function () { console.log("Consent for marketing cookies!");` // Triggers when it has consent for marketing cookies.  
+`personalizationCallback` default: `function () { console.log("Consent for personalization cookies!");` // Triggers when it has consent for personalization cookies.  
 
 
 # Lexicon options
