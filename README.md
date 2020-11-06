@@ -83,7 +83,7 @@ You can also add other languages if needed.
 
 # Public functions
 `AMPEr.init(options)` Initialize the cookiebanner with options specified above.  
-`AMPEr.openModal()` Renders the modal / appends the modal before the closing </body>
+`AMPEr.openModal()` Renders the modal / appends the modal before the closing `</body>`.  
 `AMPEr.getConsent(category)` Returns true or false if consent is given for the category, available categorys are "analytic", "marketing" and "personalization".       
 `AMPEr.analytic(boolean)` Sets content true or false for the analytic cookies, doesn't fire the callback.    
 `AMPEr.marketing(boolean)` Sets content true or false for the marketing cookies, doesn't fire the callback.    
