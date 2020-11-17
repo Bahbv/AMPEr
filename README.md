@@ -91,10 +91,10 @@ You can also add other languages if needed.
 
 # Accessibility
 ### What i did
-I tried to make the banner as accesible as possible.  
-The focus changes to the modal when opening, the modal has correct role, labeledby and descripedby.  
-.sr-only class is included in the css to make some text visually hidden an accesible by screen readers.  
-I also make use of a little script that sets using-mouse to the <html> so focus styles aren't visible when the mouse is being used.  
+I tried to make the banner as accessible as possible.  
+The focus changes to the modal when opening, the modal has the correct role, labeledby and descripedby attributes.  
+.sr-only class is included in the css to make some text visually hidden but accessible by screen readers.  
+I'm also making use of a little script that sets using-mouse to the <html> so focus styles aren't visible when the mouse is being used.  
   
 ### Using mouse script
 ```js
