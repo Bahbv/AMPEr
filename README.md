@@ -38,7 +38,7 @@ You can use the following options.
 
 
 # Lexicon options
-I'm just gonna past the default lexicon here, you can change these values to make use of other icons / text.  
+I'm just gonna paste the default lexicon here, you can change these values to make use of other icons / text.  
 You can also add other languages if needed.  
 ```js
         lexicon: {
