@@ -4,10 +4,10 @@
  * AMPEr is a vanilla js cookiebanner compliant with eu gdpr.
  * (A)nalytic (M)arketing (P)ersonalization (E)ssential rozekoek.
  * 
- * @version     1.0
+ * @version     2.0
  * @license     http://www.opensource.org/licenses/mit-license.html MIT License
  * @author      Bob Vrijland <bob@bahbv.net>
- * @updated     06-11-2020
+ * @updated     11-12-2020
  * @link        https://github.com/Bahbv
  */
 
@@ -36,7 +36,7 @@
 
 // Variables
 $knob-color: white;
-$active-color:  #f776bb;
+$active-color:  #222;
 $inactive-color: grey;
 
 /* 2. Helpers ( Maybe this is already included, but heck .. )*/
