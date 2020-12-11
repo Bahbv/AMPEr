@@ -1,7 +1,14 @@
-/*!
- * AMPEr
- * Vanilla javascript cookie banner compliant with the EU GDPR
- * (c) 2020 Bob Vrijland, MIT License, https://github.com/bahbv 
+/**
+ * AMPEr.scss
+ *
+ * AMPEr is a vanilla js cookiebanner compliant with eu gdpr.
+ * (A)nalytic (M)arketing (P)ersonalization (E)ssential rozekoek.
+ * 
+ * @version     2.0
+ * @license     http://www.opensource.org/licenses/mit-license.html MIT License
+ * @author      Bob Vrijland <bob@bahbv.net>
+ * @updated     11-12-2020
+ * @link        https://github.com/Bahbv
  */
 /* Styling for AMPEr cookie banner 
  * 1. Variables and functions
@@ -45,7 +52,7 @@ html.using-mouse :focus + label span:last-child {
   border-radius: 0.625rem; }
   .AMPEr_modal_head {
     margin: 0;
-    color: #f776bb;
+    color: #222;
     font-size: 2rem;
     display: flex;
     align-items: center; }
@@ -72,7 +79,7 @@ html.using-mouse :focus + label span:last-child {
   padding: 0.5rem 1rem;
   margin: 0;
   text-decoration: none;
-  background: #f776bb;
+  background: #222;
   color: #ffffff;
   font-size: 1rem;
   font-weight: 600;
@@ -83,7 +90,7 @@ html.using-mouse :focus + label span:last-child {
   -webkit-appearance: none;
   -moz-appearance: none; }
   .AMPEr_btn:hover, .AMPEr_btn:focus {
-    background: #f65eaf; }
+    background: #151515; }
   .AMPEr_btn:focus {
     outline: 0;
     box-shadow: 0 0 0 0.1875rem black; }
@@ -92,18 +99,18 @@ html.using-mouse :focus + label span:last-child {
   .AMPEr_btn--settings, .AMPEr_btn--info {
     padding: 0.425rem 0.425rem;
     background: transparent;
-    border: 0.125rem solid #f776bb;
-    color: #f776bb; }
+    border: 0.125rem solid #222;
+    color: #222; }
     .AMPEr_btn--settings:hover, .AMPEr_btn--settings:focus, .AMPEr_btn--info:hover, .AMPEr_btn--info:focus {
       background: transparent;
-      border-color: #f65eaf;
-      color: #f65eaf; }
+      border-color: #151515;
+      color: #151515; }
       .AMPEr_btn--settings:hover i svg, .AMPEr_btn--settings:focus i svg, .AMPEr_btn--info:hover i svg, .AMPEr_btn--info:focus i svg {
-        fill: #f65eaf; }
+        fill: #151515; }
 
 .AMPEr_icon--gear svg {
   display: block;
-  fill: #f776bb;
+  fill: #222;
   width: auto;
   height: 1.2rem; }
 
@@ -166,7 +173,7 @@ html.using-mouse :focus + label span:last-child {
   .AMPEr_switches .AMPEr_switch input[disabled] + label span:last-of-type {
     opacity: 0.5; }
   .AMPEr_switches .AMPEr_switch input:checked + label span:last-child {
-    background: #f776bb; }
+    background: #222; }
     .AMPEr_switches .AMPEr_switch input:checked + label span:last-child:before {
       transform: translateX(1.5rem); }
     .AMPEr_switches .AMPEr_switch input:checked + label span:last-child:after {
@@ -178,13 +185,13 @@ html.using-mouse :focus + label span:last-child {
   .AMPEr_switches .AMPEr_switch:hover span:last-child {
     background: #737373; }
   .AMPEr_switches .AMPEr_switch:hover input:checked + label span:last-child {
-    background: #f65eaf; }
+    background: #151515; }
   .AMPEr_switches .AMPEr_switch input:focus + label span:last-child {
     background: #737373;
     outline: 0;
     box-shadow: 0 0 0 0.1875rem black; }
   .AMPEr_switches .AMPEr_switch input:checked:focus + label span:last-child {
-    background: #f65eaf;
+    background: #151515;
     outline: 0;
     box-shadow: 0 0 0 0.1875rem black; }
 

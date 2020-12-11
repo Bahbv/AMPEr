@@ -4,10 +4,10 @@
  * AMPEr is a vanilla js cookiebanner compliant with eu gdpr.
  * (A)nalytic (M)arketing (P)ersonalization (E)ssential rozekoek.
  * 
- * @version     1.0
+ * @version     2.0
  * @license     http://www.opensource.org/licenses/mit-license.html MIT License
  * @author      Bob Vrijland <bob@bahbv.net>
- * @updated     06-11-2020
+ * @updated     11-12-2020
  * @link        https://github.com/Bahbv
  */
 
@@ -31,6 +31,7 @@ var AMPEr = (function () {
         analytic: 1,
         marketing: 1,
         personalization: 1,
+        set: 0,
     }
     // Defaults
     let defaults = {
@@ -48,7 +49,7 @@ var AMPEr = (function () {
                 settingsTitle: "<i class='AMPEr_icon--rozekoek' aria-hidden='true'></i>Settings",
                 saveBtn: "Save <span class='sr-only'>cookie settings and close the this popup.</span>",
                 infoBtn: "More info <span class='sr-only'>about cookies</span>",
-                infoPage: "/cookie-disclaimer",
+                infoPage: "/cookies",
                 analytic: "Analytic cookies",
                 analyticInfo: "For analysing traffic and usage",
                 marketing: "Marketing cookies",
@@ -64,7 +65,7 @@ var AMPEr = (function () {
                 acceptBtn: "Accepteer alles <span class='sr-only'>qua cookies en sluit deze popup.</span>",
                 saveBtn: "<span class='sr-only'>Instellingen</span> Opslaan <span class='sr-only'>en deze popup sluiten.</span>",
                 infoBtn: "Meer info <span class='sr-only'>over cookies</span>",
-                infoPage: "/nl/cookie-disclaimer",
+                infoPage: "/nl/cookies",
                 settingsBtn: "<span class='sr-only'>Cookie instellingen wijzigen</span><i class='AMPEr_icon--gear' aria-hidden='true'><svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><path d='M24 13.616v-3.232c-1.651-.587-2.694-.752-3.219-2.019v-.001c-.527-1.271.1-2.134.847-3.707l-2.285-2.285c-1.561.742-2.433 1.375-3.707.847h-.001c-1.269-.526-1.435-1.576-2.019-3.219h-3.232c-.582 1.635-.749 2.692-2.019 3.219h-.001c-1.271.528-2.132-.098-3.707-.847l-2.285 2.285c.745 1.568 1.375 2.434.847 3.707-.527 1.271-1.584 1.438-3.219 2.02v3.232c1.632.58 2.692.749 3.219 2.019.53 1.282-.114 2.166-.847 3.707l2.285 2.286c1.562-.743 2.434-1.375 3.707-.847h.001c1.27.526 1.436 1.579 2.019 3.219h3.232c.582-1.636.75-2.69 2.027-3.222h.001c1.262-.524 2.12.101 3.698.851l2.285-2.286c-.744-1.563-1.375-2.433-.848-3.706.527-1.271 1.588-1.44 3.221-2.021zm-12 2.384c-2.209 0-4-1.791-4-4s1.791-4 4-4 4 1.791 4 4-1.791 4-4 4z'/></svg></i>",
                 settingsTitle: "<i class='AMPEr_icon--rozekoek' aria-hidden='true'></i>Instellingen",
                 analytic: "Analytische cookies",
@@ -209,6 +210,7 @@ var AMPEr = (function () {
      * Also executes the callbacks if its the first time running.
      */
     const saveAndClose = function () {
+        AMPEr.set = 1;
         setCookie(settings.cookieName, AMPEr, settings.cookieDays);
         if (firstTime) { execute(); }
         closeModal();
@@ -216,6 +218,7 @@ var AMPEr = (function () {
 
     /* Accept all cookies, execute them if its the first time and close the modal */
     const acceptAllAndClose = function () {
+        AMPEr.set = 1;
         AMPEr.analytic = 1;
         AMPEr.marketing = 1;
         AMPEr.personalization = 1;
@@ -325,8 +328,8 @@ var AMPEr = (function () {
             AMPEr = JSON.parse(cookieString);
         }
 
-        if (firstTime || settings.debugMode) { showCookieWindow(); }
-        if (!firstTime) { execute(); }
+        if (firstTime || AMPEr.set == 0 || settings.debugMode) { showCookieWindow(); }
+        if (!firstTime && AMPEr.set == 1) { execute(); }
 
     };
 
