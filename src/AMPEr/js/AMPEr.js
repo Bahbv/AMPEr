@@ -38,6 +38,7 @@ var AMPEr = (function () {
         cookieName: "AMPEr",
         cookieDays: 365,
         classPrefix: "AMPEr",
+        extraClass: "",
         debugMode: false,
         language: "en",
         lexicon: {
@@ -99,7 +100,7 @@ var AMPEr = (function () {
     const showCookieWindow = function () {
         let html;
 
-        html = '<div class="' + settings.classPrefix + '_modal" id="AMPEr_Cookies" role="dialog" aria-labelledby="AMPEr_title" aria-describedby="AMPEr_description">';
+        html = '<div class="' + settings.classPrefix + '_modal '+ settings.extraClass + '" id="AMPEr_Cookies" role="dialog" aria-labelledby="AMPEr_title" aria-describedby="AMPEr_description">';
         html += '<div class="' + settings.classPrefix + '_modal_inner">';
         html += '<div id="AMPEr_modal_1" class="AMPEr--active">';
         html += '<h2 class="' + settings.classPrefix + '_modal_head" id="AMPEr_title">' + settings.lexicon.[settings.language].modalTitle + '</h2>'

@@ -30,6 +30,7 @@ You can use the following options.
 `cookieDays` default: 365 // Amount of days the cookie is saved before erased by the browser.  
 `classPrefix` default: "AMPEr" // If you want to use you own styling.    
 `debugMode` default: false // Change this to true if you want to open the modal every pageload.  
+`extraClass` default: "" // Put an extra class for styling on the modal
 `language` default: "en" // What language from the lexicon we want to use.  
 `lexicon` // see below for more information.  
 `analyticCallback` default: `function () { console.log("Consent for analytic cookies!");` // Triggers when it has consent for analytic cookies.    

@@ -7,6 +7,7 @@ function main() {
   a11yFocus();
   AMPEr.init({
     debugMode: true,
+    extraClass: "AMPEr--bottom",
     language: "en"
   });
 }

@@ -18,6 +18,7 @@
  * 4. Buttons and icon's
  * 5. Toggle switch component
  * 6. Transition
+ * 7. Extra styling options
  */
 
 // 1. Variables and functions 
@@ -87,6 +88,8 @@ html.using-mouse :focus + label span:last-child {
     &_text {
         margin: 1rem 0;
     }
+
+
 }
 
 @media screen and (min-width:480px){
@@ -305,4 +308,64 @@ html.using-mouse :focus + label span:last-child {
     &.AMPEr--active {
         display: block;
     }
+}
+
+/* 7. Extra styling options */
+.AMPEr_modal.AMPEr--bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    border-radius: 0;
+
+    #AMPEr_modal_1 {
+        &.AMPEr--active {
+            display:flex;
+        }
+        align-items: center;
+        justify-content: space-between;
+
+        .AMPEr_modal_head {
+            display: none;
+        }
+        .AMPEr_description {
+            flex-grow: 1;
+        }
+        .AMPEr_modal_buttons {
+            margin-top: 0;
+            display: flex;
+            justify-content: flex-end;
+            min-width: 200px;
+        }
+    }
+    
+    #AMPEr_modal_2 {
+        background-color: white;
+        padding: 1rem;
+        border-radius: rem(10px);
+        max-width:700px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    @media screen and (max-width: 768px){
+        #AMPEr_modal_1 {
+            flex-wrap: wrap;
+    
+            .AMPEr_description {
+                flex-grow: 1;
+            }
+            .AMPEr_modal_buttons {
+                width: 100%;
+                margin-top: 0;
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+    }
+
+
+
 }

@@ -17,6 +17,7 @@
  * 4. Buttons and icon's
  * 5. Toggle switch component
  * 6. Transition
+ * 7. Extra styling options
  */
 /* 2. Helpers ( Maybe this is already included, but heck .. )*/
 .sr-only {
@@ -205,3 +206,44 @@ html.using-mouse :focus + label span:last-child {
   display: none; }
   #AMPEr_modal_2.AMPEr--active {
     display: block; }
+
+/* 7. Extra styling options */
+.AMPEr_modal.AMPEr--bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  border-radius: 0; }
+  .AMPEr_modal.AMPEr--bottom #AMPEr_modal_1 {
+    align-items: center;
+    justify-content: space-between; }
+    .AMPEr_modal.AMPEr--bottom #AMPEr_modal_1.AMPEr--active {
+      display: flex; }
+    .AMPEr_modal.AMPEr--bottom #AMPEr_modal_1 .AMPEr_modal_head {
+      display: none; }
+    .AMPEr_modal.AMPEr--bottom #AMPEr_modal_1 .AMPEr_description {
+      flex-grow: 1; }
+    .AMPEr_modal.AMPEr--bottom #AMPEr_modal_1 .AMPEr_modal_buttons {
+      margin-top: 0;
+      display: flex;
+      justify-content: flex-end;
+      min-width: 200px; }
+  .AMPEr_modal.AMPEr--bottom #AMPEr_modal_2 {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 0.625rem;
+    max-width: 700px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); }
+  @media screen and (max-width: 768px) {
+    .AMPEr_modal.AMPEr--bottom #AMPEr_modal_1 {
+      flex-wrap: wrap; }
+      .AMPEr_modal.AMPEr--bottom #AMPEr_modal_1 .AMPEr_description {
+        flex-grow: 1; }
+      .AMPEr_modal.AMPEr--bottom #AMPEr_modal_1 .AMPEr_modal_buttons {
+        width: 100%;
+        margin-top: 0;
+        display: flex;
+        justify-content: flex-end; } }

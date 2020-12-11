@@ -4,6 +4,7 @@ function main() {
 
     AMPEr.init({
         debugMode: true,
+        extraClass: "AMPEr--bottom",
         language: "en",
     });
 }
