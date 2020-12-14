@@ -208,12 +208,15 @@ html.using-mouse :focus + label span:last-child {
     display: block; }
 
 /* 7. Extra styling options */
+/* 7.1 bottom bar */
 .AMPEr_modal.AMPEr--bottom {
   bottom: 0;
   left: 0;
   right: 0;
   width: 100%;
   border-radius: 0; }
+  .AMPEr_modal.AMPEr--bottom.AMPEr--settings-active {
+    padding: 0; }
   .AMPEr_modal.AMPEr--bottom #AMPEr_modal_1 {
     align-items: center;
     justify-content: space-between; }
@@ -232,11 +235,12 @@ html.using-mouse :focus + label span:last-child {
     background-color: white;
     padding: 1rem;
     border-radius: 0.625rem;
-    max-width: 700px;
+    max-width: 400px;
     position: fixed;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); }
+    transform: translate(-50%, -50%);
+    width: 100%; }
   @media screen and (max-width: 768px) {
     .AMPEr_modal.AMPEr--bottom #AMPEr_modal_1 {
       flex-wrap: wrap; }
@@ -247,3 +251,46 @@ html.using-mouse :focus + label span:last-child {
         margin-top: 0;
         display: flex;
         justify-content: flex-end; } }
+  @media screen and (max-width: 420px) {
+    .AMPEr_modal.AMPEr--bottom #AMPEr_modal_2 {
+      width: 100%;
+      max-width: none;
+      top: unset;
+      left: unset;
+      bottom: 0;
+      transform: none;
+      border-radius: 0;
+      border-top-left-radius: 0.625rem;
+      border-top-right-radius: 0.625rem; }
+      .AMPEr_modal.AMPEr--bottom #AMPEr_modal_2 .AMPEr_modal_buttons {
+        justify-content: flex-end; } }
+
+/* 7.2 Centered (good for instant settings */
+.AMPEr_modal.AMPEr--centered {
+  left: 0;
+  right: 0;
+  margin-right: 0;
+  bottom: 0;
+  width: 100%;
+  border-radius: 0;
+  border-top-left-radius: 0.625rem;
+  border-top-right-radius: 0.625rem; }
+  @media screen and (min-width: 480px) {
+    .AMPEr_modal.AMPEr--centered {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      bottom: unset;
+      transform: translate(-50%, -50%);
+      width: 22rem;
+      border-radius: 0.625rem; } }
+
+/* 8 Underlay */
+#AMPEr_Underlay {
+  z-index: -1;
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4); }

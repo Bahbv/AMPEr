@@ -30,13 +30,20 @@ You can use the following options.
 `cookieDays` default: 365 // Amount of days the cookie is saved before erased by the browser.  
 `classPrefix` default: "AMPEr" // If you want to use you own styling.    
 `debugMode` default: false // Change this to true if you want to open the modal every pageload.  
-`extraClass` default: "" // Put an extra class for styling on the modal
+`extraClass` default: "" // Put an extra class for styling on the modal  
+`underlay` default: false // Adds an div with id AMPEr_underlay to the document when the modal is active.  
+`instantSettings` default: false // Skips the intro and go straight to the settings.  
 `language` default: "en" // What language from the lexicon we want to use.  
 `lexicon` // see below for more information.  
 `analyticCallback` default: `function () { console.log("Consent for analytic cookies!");` // Triggers when it has consent for analytic cookies.    
 `marketingCallback` default: `function () { console.log("Consent for marketing cookies!");` // Triggers when it has consent for marketing cookies.  
 `personalizationCallback` default: `function () { console.log("Consent for personalization cookies!");` // Triggers when it has consent for personalization cookies.  
 
+## extraClass
+I added some default extra classes for a little different out of the box styling  
+We can use the following as a value for `extraClass`  
+`AMPEr--centered` This style has the modal centered in the screen, could be used with an underlay and instantSettings.  
+`AMPEr--bottom` This style has the intro modal as a bottom bar without the title, the settings are centered.  
 
 # Lexicon options
 I'm just gonna paste the default lexicon here, you can change these values to make use of other icons / text.  

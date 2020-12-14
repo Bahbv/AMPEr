@@ -39,6 +39,8 @@ var AMPEr = function () {
     extraClass: "",
     debugMode: false,
     language: "en",
+    underlay: false,
+    instantSettings: false,
     lexicon: {
       en: {
         modalTitle: "<i class='AMPEr_icon--rozekoek' aria-hidden='true'></i>Cookies!",
@@ -135,10 +137,19 @@ var AMPEr = function () {
     html += '</div>';
     html += '</div>';
     html += '</div></div>';
+
+    if (settings.underlay) {
+      html += '<div id="AMPEr_Underlay"></div>';
+    }
+
     document.body.insertAdjacentHTML('beforeend', html);
     modal = document.getElementById('AMPEr_Cookies');
     setFocus();
     addModalListeners();
+
+    if (settings.instantSettings) {
+      showSettings();
+    }
   };
   /**
    * Adds all the functions for the checkboxes, buttons and keydown's
@@ -273,6 +284,11 @@ var AMPEr = function () {
     var modal = document.getElementById("AMPEr_Cookies");
     modal.remove();
     firstFocusedElement.focus();
+
+    if (settings.underlay) {
+      var underlay = document.getElementById("AMPEr_Underlay");
+      underlay.remove();
+    }
   };
   /**
    * Shows the settings content, sets focus to it
@@ -283,8 +299,10 @@ var AMPEr = function () {
   var showSettings = function showSettings() {
     modal1 = document.getElementById("AMPEr_modal_1");
     modal2 = document.getElementById("AMPEr_modal_2");
+    var modal = document.getElementById("AMPEr_Cookies");
     modal1.classList.remove("AMPEr--active");
     modal2.classList.add("AMPEr--active");
+    modal.classList.add("AMPEr--settings-active");
     setFocusSettings();
   };
   /**

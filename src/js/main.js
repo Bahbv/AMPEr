@@ -4,8 +4,10 @@ function main() {
 
     AMPEr.init({
         debugMode: true,
-        extraClass: "AMPEr--bottom",
+        extraClass: "AMPEr--centered",
         language: "en",
+        underlay: true,
+        instantSettings: true,
     });
 }
 
