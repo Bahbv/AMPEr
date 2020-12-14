@@ -323,7 +323,7 @@ var AMPEr = function () {
       expires = "; expires=" + date.toUTCString();
     }
 
-    document.cookie = name + "=" + (value || "") + expires + "; path=/";
+    document.cookie = name + "=" + (value || "") + expires + "; path=/ ;samesite=strict ";
   };
   /**
    * Get a cookie
