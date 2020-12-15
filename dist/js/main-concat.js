@@ -7,10 +7,14 @@ function main() {
   a11yFocus();
   AMPEr.init({
     debugMode: true,
-    extraClass: "AMPEr--centered",
     language: "en",
-    underlay: true,
-    instantSettings: true
+    instantSettings: true,
+    lexicon: {
+      en: {
+        infoPage: "/cookies",
+        settingsTitle: "<i class='AMPEr_icon--rozekoek' aria-hidden='true'></i>Cookie settings"
+      }
+    }
   });
 }
 

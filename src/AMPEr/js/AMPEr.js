@@ -247,6 +247,37 @@ var AMPEr = (function () {
         }
     }
 
+    /**
+    * Performs a deep merge of objects and returns new object. Does not modify
+    * objects (immutable) and merges arrays via concatenation.
+    *
+    * @param {...object} objects - Objects to merge
+    * @returns {object} New object with merged key/values
+    * @uri https://stackoverflow.com/a/48218209
+    */
+    function mergeDeep(...objects) {
+        const isObject = obj => obj && typeof obj === 'object';
+        
+        return objects.reduce((prev, obj) => {
+        Object.keys(obj).forEach(key => {
+            const pVal = prev[key];
+            const oVal = obj[key];
+            
+            if (Array.isArray(pVal) && Array.isArray(oVal)) {
+            prev[key] = pVal.concat(...oVal);
+            }
+            else if (isObject(pVal) && isObject(oVal)) {
+            prev[key] = mergeDeep(pVal, oVal);
+            }
+            else {
+            prev[key] = oVal;
+            }
+        });
+        
+        return prev;
+        }, {});
+    }
+  
 
     /**
      * Shows the settings content, sets focus to it
@@ -329,7 +360,8 @@ var AMPEr = (function () {
      */
     publicMethod.init = function (options) {
         // Merge settings with defaults
-        settings = Object.assign({}, defaults, options);
+        //settings = Object.assign({}, defaults, options);
+        settings = mergeDeep(defaults, options);
 
         // Check if there already is a cookie, otherwise show the window and make one.
         const cookie = getCookie(settings.cookieName);
