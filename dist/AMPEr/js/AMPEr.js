@@ -20,10 +20,10 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
  * AMPEr is a vanilla js cookiebanner compliant with eu gdpr.
  * (A)nalytic (M)arketing (P)ersonalization (E)ssential rozekoek.
  * 
- * @version     2.0
+ * @version     2.1
  * @license     http://www.opensource.org/licenses/mit-license.html MIT License
  * @author      Bob Vrijland <bob@bahbv.net>
- * @updated     11-12-2020
+ * @updated     15-12-2020
  * @link        https://github.com/Bahbv
  */
 var AMPEr = function () {
