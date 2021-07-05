@@ -4,7 +4,7 @@
  * AMPEr is a vanilla js cookiebanner compliant with eu gdpr.
  * (A)nalytic (M)arketing (P)ersonalization (E)ssential rozekoek.
  * 
- * @version     2.1
+ * @version     2.2
  * @license     http://www.opensource.org/licenses/mit-license.html MIT License
  * @author      Bob Vrijland <bob@bahbv.net>
  * @updated     15-12-2020
@@ -23,6 +23,7 @@ var AMPEr = (function () {
     let settings;
     let firstFocusedElement;
     let firstTime = false;
+    let modalIsOpen = false;
     let modal;
     let modal1;
     let modal2;
@@ -101,7 +102,7 @@ var AMPEr = (function () {
      */
     const showCookieWindow = function () {
         let html;
-
+        modalIsOpen = true;
         
         html = '<div class="' + settings.classPrefix + '_modal '+ settings.extraClass + '" id="AMPEr_Cookies" role="dialog" aria-labelledby="AMPEr_title" aria-describedby="AMPEr_description">';
         html += '<div class="' + settings.classPrefix + '_modal_inner">';
@@ -238,6 +239,7 @@ var AMPEr = (function () {
      */
     const closeModal = function () {
         const modal = document.getElementById("AMPEr_Cookies");
+        modalIsOpen = false;
         modal.remove();
         firstFocusedElement.focus();
 
@@ -383,7 +385,9 @@ var AMPEr = (function () {
      * Add the modal to the html
      */
     publicMethod.openModal = function () {
-        showCookieWindow();
+        if (!modalIsOpen){
+            showCookieWindow();
+        }
     }
 
     /**
