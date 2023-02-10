@@ -304,7 +304,8 @@ var AMPEr = function () {
     var modal = document.getElementById("AMPEr_Cookies");
     modal.remove();
     firstFocusedElement.focus();
-
+    document.body.classList.remove('cookie-open');
+    
     if (settings.underlay) {
       var underlay = document.getElementById("AMPEr_Underlay");
       underlay.remove();
