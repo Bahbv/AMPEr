@@ -111,6 +111,12 @@ var AMPEr = function () {
    */
 
   var showCookieWindow = function showCookieWindow() {
+    // Check if we are open already 
+    if (document.body.classList.contains('cookie-open')){
+      return;
+    }
+    document.body.classList.add('cookie-open');  
+    
     var html;
     html = '<div class="' + settings.classPrefix + '_modal ' + settings.extraClass + '" id="AMPEr_Cookies" role="dialog" aria-labelledby="AMPEr_title" aria-describedby="AMPEr_description">';
     html += '<div class="' + settings.classPrefix + '_modal_inner">';
